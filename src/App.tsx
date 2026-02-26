@@ -1,277 +1,82 @@
-import { useState } from "react";
-import "./App.css";
+import { useEffect, useMemo, useState } from "react";
+import { debounce } from "lodash";
 import RichEditor from "./components/RichEditor/RichEditor";
+import { template } from "./components/RichEditor/template";
+import "./App.css";
 
-const fakeContent = JSON.stringify({
-  root: {
-    children: [
-      {
-        children: [
-          {
-            detail: 0,
-            format: 1,
-            mode: "normal",
-            style: "",
-            text: "- 오늘 한 일",
-            type: "text",
-            version: 1,
-          },
-        ],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textFormat: 1,
-        textStyle: "",
-      },
-      {
-        children: [
-          {
-            detail: 0,
-            format: 0,
-            mode: "normal",
-            style: "color: #9b9b9b;",
-            text: "“오늘 수행한 주요 업무를 한 줄씩 정리해 주세요.”",
-            type: "text",
-            version: 1,
-          },
-        ],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textFormat: 0,
-        textStyle: "color: #9b9b9b;",
-      },
-      {
-        children: [],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textStyle: "color: #000000;",
-        textFormat: 0,
-      },
-      {
-        children: [
-          {
-            children: [
-              {
-                detail: 0,
-                format: 0,
-                mode: "normal",
-                style: "color: #000000;",
-                text: "수행업무 1",
-                type: "text",
-                version: 1,
-              },
-            ],
-            direction: null,
-            format: "",
-            indent: 0,
-            type: "listitem",
-            version: 1,
-            checked: false,
-            value: 1,
-          },
-          {
-            children: [
-              {
-                detail: 0,
-                format: 0,
-                mode: "normal",
-                style: "color: #000000;",
-                text: "수행업무 2 ",
-                type: "text",
-                version: 1,
-              },
-            ],
-            direction: null,
-            format: "",
-            indent: 0,
-            type: "listitem",
-            version: 1,
-            checked: false,
-            value: 2,
-          },
-        ],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "list",
-        version: 1,
-        textStyle: "color: #000000;",
-        listType: "check",
-        start: 1,
-        tag: "ul",
-      },
-      {
-        children: [],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textStyle: "color: #000000;",
-        textFormat: 0,
-      },
-      {
-        children: [],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textStyle: "color: #000000;",
-        textFormat: 0,
-      },
-      { type: "horizontalrule", version: 1 },
-      {
-        children: [
-          {
-            detail: 0,
-            format: 1,
-            mode: "normal",
-            style: "",
-            text: "- 상세 진행 내용 / 특이사항",
-            type: "text",
-            version: 1,
-          },
-        ],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textFormat: 1,
-        textStyle: "",
-      },
-      {
-        children: [
-          {
-            detail: 0,
-            format: 0,
-            mode: "normal",
-            style: "color: #9b9b9b;",
-            text: "“각 업무의 진행 상황, 이슈, 의사결정 사항을 적어 주세요.”",
-            type: "text",
-            version: 1,
-          },
-        ],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textFormat: 0,
-        textStyle: "color: #9b9b9b;",
-      },
-      {
-        children: [],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textStyle: "color: #000000;",
-        textFormat: 0,
-      },
-      {
-        children: [],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textStyle: "color: #000000;",
-        textFormat: 0,
-      },
-      { type: "horizontalrule", version: 1 },
-      {
-        children: [
-          {
-            detail: 0,
-            format: 1,
-            mode: "normal",
-            style: "",
-            text: "- 내일(향후) 계획",
-            type: "text",
-            version: 1,
-          },
-        ],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textFormat: 1,
-        textStyle: "",
-      },
-      {
-        children: [
-          {
-            detail: 0,
-            format: 0,
-            mode: "normal",
-            style: "color: #9b9b9b;",
-            text: "“내일(다음 근무일)에 이어서 할 일과 우선순위를 적어 주세요.”",
-            type: "text",
-            version: 1,
-          },
-        ],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textFormat: 0,
-        textStyle: "color: #9b9b9b;",
-      },
-      {
-        children: [],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textStyle: "color: #000000;",
-        textFormat: 0,
-      },
-      {
-        children: [],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-        textStyle: "color: #000000;",
-        textFormat: 0,
-      },
-    ],
-    direction: null,
-    format: "",
-    indent: 0,
-    type: "root",
-    version: 1,
-  },
-});
-
-//const fakeContent = ''
+const STORAGE_KEY = "rich_editor_content";
+type SaveStatus = "idle" | "saving" | "saved";
 
 function App() {
-  const [content, setContent] = useState<string | undefined>(fakeContent);
+  const [content, setContent] = useState<string | undefined>(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved || template;
+  });
+  const [editorKey, setEditorKey] = useState(0);
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
+
+  const debouncedSave = useMemo(
+    () =>
+      debounce(
+        (newContent: string) => {
+          localStorage.setItem(STORAGE_KEY, newContent);
+          setSaveStatus("saved");
+
+          setTimeout(() => {
+            setSaveStatus("idle");
+          }, 1000);
+        },
+        1000,
+        {
+          maxWait: 5000,
+        },
+      ),
+    [],
+  );
+
+  useEffect(() => {
+    if (content !== undefined) {
+      setSaveStatus("saving");
+      debouncedSave(content);
+    }
+
+    return () => debouncedSave.cancel();
+  }, [content, debouncedSave]);
+
+  const resetFomat = () => {
+    if (
+      content !== template &&
+      !window.confirm("양식이 초기화됩니다. 계속하시겠습니까?")
+    ) {
+      return;
+    }
+
+    debouncedSave.cancel();
+    localStorage.removeItem(STORAGE_KEY);
+
+    setContent(template);
+    setSaveStatus("idle");
+    setEditorKey((prevKey) => prevKey + 1);
+  };
 
   return (
     <>
-      <div className="data">
-        <div className="title">데이터</div>
-        <div>{content}</div>
-      </div>
+      <div className="temp-control">
+        <button type="button" onClick={resetFomat}>
+          양식 초기화
+        </button>
 
-      <RichEditor value={content} onChange={setContent} />
+        <div className={`save-indicator ${saveStatus}`}>
+          {saveStatus === "saving" && <span>저장 중...</span>}
+          {saveStatus === "saved" && (
+            <span style={{ color: "#4caf50" }}>저장 완료</span>
+          )}
+          {saveStatus === "idle" && (
+            <span style={{ color: "#999" }}>입력 대기 중</span>
+          )}
+        </div>
+      </div>
+      <RichEditor key={editorKey} value={content} onChange={setContent} />
     </>
   );
 }

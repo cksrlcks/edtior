@@ -24,18 +24,22 @@ body {
   max-width: 1024px;
   margin: 0 auto;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .temp-control button {
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #000;
   color: white;
   cursor: pointer;
+  font-weight: 500;
 }
 
-.title{
+.title {
   margin-bottom: 8px;
   color: #fff;
 }
@@ -54,4 +58,19 @@ body {
   font-size: 14px;
   font-weight: 300;
   white-space: pre-wrap;
+}
+
+.save-indicator {
+  font-size: 0.85rem;
+  transition: opacity 0.3s ease;
+  min-width: 100px;
+  text-align: right;
+}
+
+.save-indicator.saving {
+  opacity: 1;
+}
+
+.save-indicator.saved {
+  font-weight: bold;
 }
