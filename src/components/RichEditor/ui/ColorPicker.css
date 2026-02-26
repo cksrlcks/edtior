@@ -8,6 +8,7 @@
 
 .color-picker-wrapper {
   padding: 20px;
+  width:240px !important;
 }
 
 .color-picker-basic-color {

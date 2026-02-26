@@ -507,7 +507,7 @@ function TableActionMenu({
         type="button"
         className="item"
         onClick={() =>
-          showColorPickerModal('Cell background color', () => (
+          showColorPickerModal('셀 배경 색상', () => (
             <ColorPicker
               color={backgroundColor}
               onChange={handleCellBackgroundColor}
@@ -515,17 +515,17 @@ function TableActionMenu({
           ))
         }
         data-test-id="table-background-color">
-        <span className="text">Background color</span>
+        <span className="text">셀 배경 색상</span>
       </button>
-      <button
+      {/* <button
         type="button"
         className="item"
         onClick={() => toggleRowStriping()}
         data-test-id="table-row-striping">
         <span className="text">Toggle Row Striping</span>
-      </button>
+      </button> */}
       <DropDown
-        buttonLabel="Vertical Align"
+        buttonLabel="수직 정렬"
         buttonClassName="item"
         buttonAriaLabel="Formatting options for vertical alignment">
         <DropDownItem
@@ -535,7 +535,7 @@ function TableActionMenu({
           className="item wide">
           <div className="icon-text-container">
             <i className="icon vertical-top" />
-            <span className="text">Top Align</span>
+            <span className="text">위쪽 정렬</span>
           </div>
         </DropDownItem>
         <DropDownItem
@@ -545,7 +545,7 @@ function TableActionMenu({
           className="item wide">
           <div className="icon-text-container">
             <i className="icon vertical-middle" />
-            <span className="text">Middle Align</span>
+            <span className="text">가운데 정렬</span>
           </div>
         </DropDownItem>
         <DropDownItem
@@ -555,11 +555,11 @@ function TableActionMenu({
           className="item wide">
           <div className="icon-text-container">
             <i className="icon vertical-bottom" />
-            <span className="text">Bottom Align</span>
+            <span className="text">아래쪽 정렬</span>
           </div>
         </DropDownItem>
       </DropDown>
-      <button
+      {/* <button
         type="button"
         className="item"
         onClick={() => toggleFirstRowFreeze()}
@@ -572,7 +572,7 @@ function TableActionMenu({
         onClick={() => toggleFirstColumnFreeze()}
         data-test-id="table-freeze-first-column">
         <span className="text">Toggle First Column Freeze</span>
-      </button>
+      </button> */}
       <hr />
       <button
         type="button"
@@ -580,9 +580,9 @@ function TableActionMenu({
         onClick={() => insertTableRowAtSelection(false)}
         data-test-id="table-insert-row-above">
         <span className="text">
-          Insert{' '}
-          {selectionCounts.rows === 1 ? 'row' : `${selectionCounts.rows} rows`}{' '}
-          above
+          위쪽으로{" "}
+          {selectionCounts.rows === 1 ? '행' : `${selectionCounts.rows} 행`}{' '}
+          추가
         </span>
       </button>
       <button
@@ -591,9 +591,9 @@ function TableActionMenu({
         onClick={() => insertTableRowAtSelection(true)}
         data-test-id="table-insert-row-below">
         <span className="text">
-          Insert{' '}
-          {selectionCounts.rows === 1 ? 'row' : `${selectionCounts.rows} rows`}{' '}
-          below
+          아래쪽으로{" "}
+          {selectionCounts.rows === 1 ? '행' : `${selectionCounts.rows} 행`}{' '}
+          추가
         </span>
       </button>
       <hr />
@@ -603,11 +603,11 @@ function TableActionMenu({
         onClick={() => insertTableColumnAtSelection(false)}
         data-test-id="table-insert-column-before">
         <span className="text">
-          Insert{' '}
+          왼쪽으로{" "}
           {selectionCounts.columns === 1
-            ? 'column'
-            : `${selectionCounts.columns} columns`}{' '}
-          left
+            ? '열'
+            : `${selectionCounts.columns} 열`}{' '}
+          추가
         </span>
       </button>
       <button
@@ -616,11 +616,11 @@ function TableActionMenu({
         onClick={() => insertTableColumnAtSelection(true)}
         data-test-id="table-insert-column-after">
         <span className="text">
-          Insert{' '}
+          오른쪽으로{" "}
           {selectionCounts.columns === 1
-            ? 'column'
-            : `${selectionCounts.columns} columns`}{' '}
-          right
+            ? '열'
+            : `${selectionCounts.columns} 열`}{' '}
+          추가
         </span>
       </button>
       <hr />
@@ -629,21 +629,21 @@ function TableActionMenu({
         className="item"
         onClick={() => deleteTableColumnAtSelection()}
         data-test-id="table-delete-columns">
-        <span className="text">Delete column</span>
+        <span className="text">열 삭제</span>
       </button>
       <button
         type="button"
         className="item"
         onClick={() => deleteTableRowAtSelection()}
         data-test-id="table-delete-rows">
-        <span className="text">Delete row</span>
+        <span className="text">행 삭제</span>
       </button>
       <button
         type="button"
         className="item"
         onClick={() => deleteTableAtSelection()}
         data-test-id="table-delete">
-        <span className="text">Delete table</span>
+        <span className="text">테이블 삭제</span>
       </button>
       <hr />
       <button
@@ -654,9 +654,8 @@ function TableActionMenu({
         <span className="text">
           {(tableCellNode.__headerState & TableCellHeaderStates.ROW) ===
           TableCellHeaderStates.ROW
-            ? 'Remove'
-            : 'Add'}{' '}
-          row header
+            ? '행 헤더 제거'
+            : '행 헤더 추가'}
         </span>
       </button>
       <button
@@ -667,9 +666,8 @@ function TableActionMenu({
         <span className="text">
           {(tableCellNode.__headerState & TableCellHeaderStates.COLUMN) ===
           TableCellHeaderStates.COLUMN
-            ? 'Remove'
-            : 'Add'}{' '}
-          column header
+            ? '열 헤더 제거'
+            : '열 헤더 추가'}
         </span>
       </button>
     </div>,

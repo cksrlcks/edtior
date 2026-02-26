@@ -57,6 +57,10 @@
 .Modal__closeButton:hover {
   background-color: #ddd;
 }
-.Modal__content {
-  padding-top: 20px;
+.Modal__content{
+  padding-top:20px;
+}
+
+.Modal__content .color-picker-wrapper {
+  padding:0;
 }
