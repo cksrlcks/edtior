@@ -242,7 +242,7 @@ export default function DraggableBlockPlugin({
               }}>
               <input
                 className="component-picker-search"
-                placeholder="Filter blocks..."
+                placeholder="블록 검색..."
                 value={queryString}
                 ref={searchInputRef}
                 onChange={(event) => setQueryString(event.target.value)}
@@ -273,7 +273,7 @@ export default function DraggableBlockPlugin({
         menuComponent={
           <div ref={menuRef} className="icon draggable-block-menu">
             <button
-              title="Click to add below"
+              title="아래에 블록추가"
               className="icon icon-plus"
               onClick={openComponentPicker}
             />
