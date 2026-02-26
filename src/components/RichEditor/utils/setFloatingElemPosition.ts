@@ -70,5 +70,5 @@ export function setFloatingElemPosition(
   left -= anchorElementRect.left;
 
   floatingElem.style.opacity = '1';
-  floatingElem.style.transform = `translate(${left}px, ${top}px)`;
+  floatingElem.style.transform = `translate(${Math.floor(left)}px, ${Math.floor(top)}px)`;
 }
