@@ -31,7 +31,7 @@
 }
 
 .editor-shell .editor-container.tree-view {
-  border-radius: 0;
+  
 }
 
 .editor-shell .editor-container.plain-text {
@@ -1411,6 +1411,8 @@ button.action-button:disabled {
   width: calc(100% - 4px);
   border-radius: 8px;
   padding: 4px;
+  background:#fff;
+  box-shadow: 0 12px 12px 0 rgba(0, 0, 0, 0.02);
 }
 
 .toolbar-inner {
