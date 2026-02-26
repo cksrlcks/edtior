@@ -635,12 +635,12 @@ function TableHoverActionsV2({
           <DropDownItem
             className="item"
             onClick={() => handleSortColumn('desc')}>
-            Sort Ascending
+            오름차순 정렬
           </DropDownItem>
           <DropDownItem
             className="item"
             onClick={() => handleSortColumn('asc')}>
-            Sort Descending
+            내림차순 정렬
           </DropDownItem>
         </DropDown>
         <button
