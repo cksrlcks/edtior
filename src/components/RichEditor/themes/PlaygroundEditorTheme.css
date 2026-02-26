@@ -1755,17 +1755,18 @@ button.item.dropdown-item-active i {
 }
 .PlaygroundEditorTheme__h1 {
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 700;
   margin: 0;
 }
 .PlaygroundEditorTheme__h2 {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 0;
   text-transform: uppercase;
 }
 .PlaygroundEditorTheme__h3 {
   font-size: 18px;
+  font-weight: 500;
   margin: 0;
   text-transform: uppercase;
 }
