@@ -1510,16 +1510,15 @@ button.toolbar-item.active i {
 
 .toolbar i.chevron-down,
 .toolbar-item i.chevron-down {
-  margin-top: 3px;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   display: flex;
   user-select: none;
 }
 
 .toolbar i.chevron-down.inside {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   display: flex;
   margin-left: -25px;
   margin-top: 11px;
