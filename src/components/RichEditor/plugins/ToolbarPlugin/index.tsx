@@ -1332,7 +1332,7 @@ export default function ToolbarPlugin({
 
                   <DropDownItem
                     onClick={() => {
-                      showModal("Insert Table", (onClose) => (
+                      showModal("표 삽입", (onClose) => (
                         <InsertTableDialog
                           activeEditor={activeEditor}
                           onClose={onClose}

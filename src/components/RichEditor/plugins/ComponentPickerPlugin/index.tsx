@@ -177,7 +177,7 @@ export function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       icon: <i className="icon table" />,
       keywords: ['table', 'grid', 'spreadsheet', 'rows', 'columns'],
       onSelect: () =>
-        showModal('Insert Table', (onClose) => (
+        showModal('표 삽입', (onClose) => (
           <InsertTableDialog activeEditor={editor} onClose={onClose} />
         )),
     }),
