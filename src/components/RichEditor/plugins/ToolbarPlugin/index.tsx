@@ -1314,7 +1314,7 @@ export default function ToolbarPlugin({
                     className="item"
                   >
                     <i className="icon horizontal-rule" />
-                    <span className="text">수평선</span>
+                    <span className="text">구분선</span>
                   </DropDownItem>
 
                   {/* <DropDownItem

@@ -585,31 +585,25 @@ i.page-break,
   background-color: rgb(223, 232, 250);
 }
 
-.link-editor:has(.link-confirm){
-   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  background:#fff;
-  border: 1px solid #eee;
-}
-
 .link-editor .link-input {
   display: block;
-  width: calc(100% - 75px);
+  flex:1;
   box-sizing: border-box;
-  margin: 12px 12px;
-  padding: 8px 12px;
+  padding: 7px 12px;
   border-radius: 15px;
   background-color: #eee;
-  font-size: 15px;
+  font-size: 14px;
   color: rgb(5, 5, 5);
   border: 0;
   outline: 0;
   position: relative;
   font-family: inherit;
+  margin-right: 12px;
 }
 
-.link-editor .link-view {
-  display: block;
+.link-editor .link-view, .link-editor .link-modify {
+  display: flex;
+  align-items: center;
   width: calc(100% - 24px);
   padding: 18px 24px;
   border-radius: 15px;
@@ -623,70 +617,44 @@ i.page-break,
   border-radius: 8px;
   background:#fff;
   border: 1px solid #eee;
+  gap: 0;
 }
 
 .link-editor .link-view a {
   display: block;
   word-break: break-word;
   width: calc(100% - 33px);
+  padding-right: 12px;
+  line-height:1.2;
+  color: rgb(33, 111, 219) !important;
+  text-decoration: underline !important;
 }
 
-.link-editor div.link-edit {
-  background-image: url(../images/icons/pencil-fill.svg);
-  background-size: 16px;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 35px;
-  vertical-align: -0.25em;
-  position: absolute;
-  right: 14px;
-  top: 0;
-  bottom: 0;
-  cursor: pointer;
+.link-editor .link-controls{
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-right:-10px;
+  margin-left: auto;
 }
 
-.link-editor div.link-trash {
-  background-image: url(../images/icons/trash.svg);
-  background-size: 16px;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 35px;
-  vertical-align: -0.25em;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
+.link-editor .link-control-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 4px;
   cursor: pointer;
+  font-size:14px;
 }
 
-.link-editor div.link-cancel {
-  background-image: url(../images/icons/close.svg);
-  background-size: 16px;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 35px;
-  vertical-align: -0.25em;
-  margin-right: 28px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  cursor: pointer;
+.link-editor .link-control-btn:hover {
+  background-color: #eee;
 }
 
-.link-editor div.link-confirm {
-  background-image: url(../images/icons/success-alt.svg);
-  background-size: 16px;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 35px;
-  vertical-align: -0.25em;
-  margin-right: 2px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  cursor: pointer;
+.link-editor .link-trash, .link-editor .link-cancel {
+  color:#888;
 }
 
 .link-editor .link-input a {
@@ -1453,7 +1421,7 @@ button.toolbar-item i.format {
   width: 18px;
   vertical-align: -0.25em;
   display: flex;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 button.toolbar-item:disabled .icon,
@@ -1464,7 +1432,9 @@ button.toolbar-item:disabled .chevron-down {
 }
 
 button.toolbar-item.active {
-  background-color: rgba(223, 232, 250, 0.3);
+  background-color: #E5F2FC;
+  color: #2783DE;
+  font-weight:500;
 }
 
 button.toolbar-item.active i {
@@ -1695,7 +1665,9 @@ button.item i {
 }
 
 button.item.dropdown-item-active {
-  background-color: rgba(223, 232, 250, 0.3);
+  background-color: #E5F2FC;
+  color: #2783DE;
+  font-weight:500
 }
 
 button.item.dropdown-item-active i {
@@ -1845,6 +1817,8 @@ button.item.dropdown-item-active i {
   vertical-align: super;
 }
 .PlaygroundEditorTheme__textCode {
+  color:#EB5757 !important;
+  border-radius: 4px;
   background-color: rgb(240, 242, 245);
   padding: 1px 0.25rem;
   font-family: Menlo, Consolas, Monaco, monospace;
@@ -1864,8 +1838,12 @@ button.item.dropdown-item-active i {
   border-bottom: 1px solid rgba(88, 144, 255, 0.3);
 }
 .PlaygroundEditorTheme__link {
-  color: rgb(33, 111, 219);
-  text-decoration: none;
+  color: rgb(33, 111, 219) !important;
+  text-decoration: underline !important;
+}
+.PlaygroundEditorTheme__link span {
+  color: rgb(33, 111, 219) !important;
+  text-decoration: underline !important;
 }
 .PlaygroundEditorTheme__link:hover {
   text-decoration: underline;

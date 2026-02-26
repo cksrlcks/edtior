@@ -116,7 +116,7 @@ export default function ColorPicker({
               ))}
             </div>
           </div>
-          <div className="color-picker-divider" />
+          <div className="divider"></div>
         </>
       )}
 

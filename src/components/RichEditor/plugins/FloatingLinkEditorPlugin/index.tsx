@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import type {JSX} from 'react';
+import type { JSX } from "react";
 
-import './index.css';
+import "./index.css";
 
 import {
   $createLinkNode,
   $isAutoLinkNode,
   $isLinkNode,
   TOGGLE_LINK_COMMAND,
-} from '@lexical/link';
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {$findMatchingParent, mergeRegister} from '@lexical/utils';
+} from "@lexical/link";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $findMatchingParent, mergeRegister } from "@lexical/utils";
 import {
   $getSelection,
   $isLineBreakNode,
@@ -31,14 +31,15 @@ import {
   KEY_ESCAPE_COMMAND,
   LexicalEditor,
   SELECTION_CHANGE_COMMAND,
-} from 'lexical';
-import {Dispatch, useCallback, useEffect, useRef, useState} from 'react';
-import * as React from 'react';
-import {createPortal} from 'react-dom';
+} from "lexical";
+import { Dispatch, useCallback, useEffect, useRef, useState } from "react";
+import * as React from "react";
+import { createPortal } from "react-dom";
 
-import {getSelectedNode} from '../../utils/getSelectedNode';
-import {setFloatingElemPositionForLinkEditor} from '../../utils/setFloatingElemPositionForLinkEditor';
-import {sanitizeUrl} from '../../utils/url';
+import { getSelectedNode } from "../../utils/getSelectedNode";
+import { setFloatingElemPositionForLinkEditor } from "../../utils/setFloatingElemPositionForLinkEditor";
+import { sanitizeUrl } from "../../utils/url";
+import { Edit, Pen, Trash } from "lucide-react";
 
 function preventDefault(
   event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLElement>,
@@ -63,8 +64,8 @@ function FloatingLinkEditor({
 }): JSX.Element {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [linkUrl, setLinkUrl] = useState('');
-  const [editedLinkUrl, setEditedLinkUrl] = useState('https://');
+  const [linkUrl, setLinkUrl] = useState("");
+  const [editedLinkUrl, setEditedLinkUrl] = useState("https://");
   const [lastSelection, setLastSelection] = useState<BaseSelection | null>(
     null,
   );
@@ -80,7 +81,7 @@ function FloatingLinkEditor({
       } else if ($isLinkNode(node)) {
         setLinkUrl(node.getURL());
       } else {
-        setLinkUrl('');
+        setLinkUrl("");
       }
       if (isLinkEditMode) {
         setEditedLinkUrl(linkUrl);
@@ -95,7 +96,7 @@ function FloatingLinkEditor({
         } else if ($isLinkNode(node)) {
           setLinkUrl(node.getURL());
         } else {
-          setLinkUrl('');
+          setLinkUrl("");
         }
         if (isLinkEditMode) {
           setEditedLinkUrl(linkUrl);
@@ -137,13 +138,13 @@ function FloatingLinkEditor({
         setFloatingElemPositionForLinkEditor(domRect, editorElem, anchorElem);
       }
       setLastSelection(selection);
-    } else if (!activeElement || activeElement.className !== 'link-input') {
+    } else if (!activeElement || activeElement.className !== "link-input") {
       if (rootElement !== null) {
         setFloatingElemPositionForLinkEditor(null, editorElem, anchorElem);
       }
       setLastSelection(null);
       setIsLinkEditMode(false);
-      setLinkUrl('');
+      setLinkUrl("");
     }
 
     return true;
@@ -158,24 +159,24 @@ function FloatingLinkEditor({
       });
     };
 
-    window.addEventListener('resize', update);
+    window.addEventListener("resize", update);
 
     if (scrollerElem) {
-      scrollerElem.addEventListener('scroll', update);
+      scrollerElem.addEventListener("scroll", update);
     }
 
     return () => {
-      window.removeEventListener('resize', update);
+      window.removeEventListener("resize", update);
 
       if (scrollerElem) {
-        scrollerElem.removeEventListener('scroll', update);
+        scrollerElem.removeEventListener("scroll", update);
       }
     };
   }, [anchorElem.parentElement, editor, $updateLinkEditor]);
 
   useEffect(() => {
     return mergeRegister(
-      editor.registerUpdateListener(({editorState}) => {
+      editor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => {
           $updateLinkEditor();
         });
@@ -226,18 +227,18 @@ function FloatingLinkEditor({
         setIsLinkEditMode(false);
       }
     };
-    editorElement.addEventListener('focusout', handleBlur);
+    editorElement.addEventListener("focusout", handleBlur);
     return () => {
-      editorElement.removeEventListener('focusout', handleBlur);
+      editorElement.removeEventListener("focusout", handleBlur);
     };
   }, [editorRef, setIsLink, setIsLinkEditMode, isLink]);
 
   const monitorInputInteraction = (
     event: React.KeyboardEvent<HTMLInputElement>,
   ) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleLinkSubmission(event);
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       event.preventDefault();
       setIsLinkEditMode(false);
     }
@@ -250,7 +251,7 @@ function FloatingLinkEditor({
   ) => {
     event.preventDefault();
     if (lastSelection !== null) {
-      if (linkUrl !== '') {
+      if (linkUrl !== "") {
         editor.update(() => {
           editor.dispatchCommand(
             TOGGLE_LINK_COMMAND,
@@ -270,7 +271,7 @@ function FloatingLinkEditor({
           }
         });
       }
-      setEditedLinkUrl('https://');
+      setEditedLinkUrl("https://");
       setIsLinkEditMode(false);
     }
   };
@@ -278,7 +279,7 @@ function FloatingLinkEditor({
   return (
     <div ref={editorRef} className="link-editor">
       {!isLink ? null : isLinkEditMode ? (
-        <>
+        <div className="link-view">
           <input
             ref={inputRef}
             className="link-input"
@@ -290,54 +291,64 @@ function FloatingLinkEditor({
               monitorInputInteraction(event);
             }}
           />
-          <div>
+          <div className="link-controls">
             <div
-              className="link-cancel"
+              className="link-confirm link-control-btn"
+              role="button"
+              tabIndex={0}
+              onMouseDown={preventDefault}
+              onClick={handleLinkSubmission}
+            >
+              저장
+            </div>
+            <div
+              className="link-cancel link-control-btn"
               role="button"
               tabIndex={0}
               onMouseDown={preventDefault}
               onClick={() => {
                 setIsLinkEditMode(false);
               }}
-            />
-
-            <div
-              className="link-confirm"
-              role="button"
-              tabIndex={0}
-              onMouseDown={preventDefault}
-              onClick={handleLinkSubmission}
-            />
+            >
+              취소
+            </div>
           </div>
-        </>
+        </div>
       ) : (
         <div className="link-view">
           <a
             href={sanitizeUrl(linkUrl)}
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             {linkUrl}
           </a>
-          <div
-            className="link-edit"
-            role="button"
-            tabIndex={0}
-            onMouseDown={preventDefault}
-            onClick={(event) => {
-              event.preventDefault();
-              setEditedLinkUrl(linkUrl);
-              setIsLinkEditMode(true);
-            }}
-          />
-          {/* <div
-            className="link-trash"
-            role="button"
-            tabIndex={0}
-            onMouseDown={preventDefault}
-            onClick={() => {
-              editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-            }}
-          /> */}
+          <div className="link-controls">
+            <div
+              className="link-edit link-control-btn"
+              role="button"
+              tabIndex={0}
+              onMouseDown={preventDefault}
+              onClick={(event) => {
+                event.preventDefault();
+                setEditedLinkUrl(linkUrl);
+                setIsLinkEditMode(true);
+              }}
+            >
+              수정
+            </div>
+            <div
+              className="link-trash link-control-btn"
+              role="button"
+              tabIndex={0}
+              onMouseDown={preventDefault}
+              onClick={() => {
+                editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+              }}
+            >
+              삭제
+            </div>
+          </div>
         </div>
       )}
     </div>
@@ -403,7 +414,7 @@ function useFloatingLinkEditorToolbar(
       }
     }
     return mergeRegister(
-      editor.registerUpdateListener(({editorState}) => {
+      editor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => {
           $updateToolbar();
         });
@@ -425,7 +436,7 @@ function useFloatingLinkEditorToolbar(
             const node = getSelectedNode(selection);
             const linkNode = $findMatchingParent(node, $isLinkNode);
             if ($isLinkNode(linkNode) && (payload.metaKey || payload.ctrlKey)) {
-              window.open(linkNode.getURL(), '_blank');
+              window.open(linkNode.getURL(), "_blank");
               return true;
             }
           }
