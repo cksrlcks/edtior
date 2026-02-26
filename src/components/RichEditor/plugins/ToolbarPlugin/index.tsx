@@ -97,6 +97,7 @@ import {
   formatParagraph,
   formatQuote,
 } from "./utils";
+import { BORDER_COLORS } from "../../ui/ColorPicker";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const rootTypeToRootName = {
@@ -864,21 +865,14 @@ export default function ToolbarPlugin({
     },
     [activeEditor],
   );
-
-  const onFontColorSelect = useCallback(
-    (value: string, skipHistoryStack: boolean, skipRefocus: boolean) => {
-      applyStyleText({ color: value }, skipHistoryStack, skipRefocus);
-    },
-    [applyStyleText],
-  );
-
-  const onBgColorSelect = useCallback(
-    (value: string, skipHistoryStack: boolean, skipRefocus: boolean) => {
-      applyStyleText(
-        { "background-color": value },
-        skipHistoryStack,
-        skipRefocus,
-      );
+  
+  const onColorSelect = useCallback(
+    (value: string, skipHistoryStack: boolean, skipRefocus: boolean, target: 'font' | 'background') => {
+      if (target === 'font') {
+       applyStyleText({ color: value }, skipHistoryStack, skipRefocus);
+      } else {
+        applyStyleText({ "background-color": value }, skipHistoryStack, skipRefocus);
+      } 
     },
     [applyStyleText],
   );
@@ -1147,12 +1141,20 @@ export default function ToolbarPlugin({
               disabled={!isEditable}
               buttonClassName="toolbar-item color-picker"
               buttonAriaLabel="Formatting text color"
-              buttonIconClassName="icon font-color"
-              color={toolbarState.fontColor}
-              onChange={onFontColorSelect}
-              title="text color"
+              //buttonIconClassName="icon font-color"
+              customLabel={<span className="text-color" style={{
+                color: toolbarState.fontColor,
+                backgroundColor: toolbarState.bgColor,
+                borderColor: BORDER_COLORS[toolbarState.bgColor as keyof typeof BORDER_COLORS] || '#ddd',
+              }}>A</span>}
+              colors={{
+                font: toolbarState.fontColor,
+                background: toolbarState.bgColor,
+              }}
+              onChange={onColorSelect}
+              title="text & background color"
             />
-            <DropdownColorPicker
+            {/* <DropdownColorPicker
               disabled={!isEditable}
               buttonClassName="toolbar-item color-picker"
               buttonAriaLabel="Formatting background color"
@@ -1160,7 +1162,7 @@ export default function ToolbarPlugin({
               color={toolbarState.bgColor}
               onChange={onBgColorSelect}
               title="bg color"
-            />
+            /> */}
             <DropDown
               disabled={!isEditable}
               buttonClassName="toolbar-item spaced"

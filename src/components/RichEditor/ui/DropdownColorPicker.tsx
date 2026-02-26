@@ -19,18 +19,23 @@ type Props = {
   buttonLabel?: string;
   title?: string;
   stopCloseOnClickSelf?: boolean;
-  color: string;
+  colors: {
+    font: string;
+    background: string;
+  };
   onChange?: (
     color: string,
     skipHistoryStack: boolean,
     skipRefocus: boolean,
+    target: 'font' | 'background',
   ) => void;
+  customLabel?: React.ReactNode;
 };
 
 export default function DropdownColorPicker({
   disabled = false,
   stopCloseOnClickSelf = true,
-  color,
+  colors,
   onChange,
   ...rest
 }: Props) {
@@ -39,7 +44,7 @@ export default function DropdownColorPicker({
       {...rest}
       disabled={disabled}
       stopCloseOnClickSelf={stopCloseOnClickSelf}>
-      <ColorPicker color={color} onChange={onChange} />
+      <ColorPicker colors={colors} onChange={onChange} />
     </DropDown>
   );
 }

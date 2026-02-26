@@ -58,6 +58,7 @@ import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
 import LexicalAutoLinkPlugin from "./plugins/AutoLinkPlugin";
 import { TableContext } from "./plugins/TablePlugin";
 import StickyPlugin from "./plugins/StickyPlugin";
+import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
 
 import { ToolbarContext } from "./context/ToolbarContext";
 import { FlashMessageContext } from "./context/FlashMessageContext";
@@ -269,6 +270,10 @@ function Editor({
                 <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
                 <CodeActionMenuPlugin anchorElem={floatingAnchorElem} />
                 <TableHoverActionsV2Plugin anchorElem={floatingAnchorElem} />
+                <FloatingTextFormatToolbarPlugin
+                  anchorElem={floatingAnchorElem}
+                  setIsLinkEditMode={setIsLinkEditMode}
+                />
               </>
             )}
           </>
