@@ -69,7 +69,8 @@ function buildImportMap(): DOMConversionMap {
               forChild: (child, parent) => {
                 const textNode = forChild(child, parent);
                 if ($isTextNode(textNode)) {
-                  textNode.setStyle(textNode.getStyle() + extraStyles);
+                  //textNode.setStyle(textNode.getStyle() + extraStyles);
+                  textNode.setStyle("font-size: 15px;");
                 }
                 return textNode;
               },
