@@ -5,8 +5,9 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
-  padding: 20px;
+  max-width: 828px;
+  margin: 0 auto;
+  padding:40px 0;
 }
 
 body {
@@ -21,8 +22,6 @@ body {
 }
 
 .temp-control {
-  max-width: 1024px;
-  margin: 0 auto;
   width: 100%;
   display: flex;
   justify-content: space-between;

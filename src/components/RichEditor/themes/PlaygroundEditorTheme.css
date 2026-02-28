@@ -12,26 +12,32 @@
 
 .editor-shell {
   margin: 20px auto;
-  max-width: 1024px;
   width: 100%;
   color: #333;
   position: relative;
   line-height: 1.7;
   font-weight: 400;
+  background: #f7f9fb;
+  border-radius: 14px;
+  padding: 14px;
+  min-height:500px;
+}
+
+.editor-shell-inner {
   background: #fff;
+  border: 1px solid #eee;
   border-radius: 10px;
+  height:100%;
+  overflow-y:auto;
+  overflow-x:hidden;
 }
 
 .editor-shell .editor-container {
-  background: #fff;
   position: relative;
   display: block;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
 }
 
 .editor-shell .editor-container.tree-view {
-  
 }
 
 .editor-shell .editor-container.plain-text {
@@ -587,7 +593,7 @@ i.page-break,
 
 .link-editor .link-input {
   display: block;
-  flex:1;
+  flex: 1;
   box-sizing: border-box;
   padding: 7px 12px;
   border-radius: 15px;
@@ -601,7 +607,8 @@ i.page-break,
   margin-right: 12px;
 }
 
-.link-editor .link-view, .link-editor .link-modify {
+.link-editor .link-view,
+.link-editor .link-modify {
   display: flex;
   align-items: center;
   width: calc(100% - 24px);
@@ -615,7 +622,7 @@ i.page-break,
   font-family: inherit;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  background:#fff;
+  background: #fff;
   border: 1px solid #eee;
   gap: 0;
 }
@@ -625,20 +632,20 @@ i.page-break,
   word-break: break-word;
   width: calc(100% - 33px);
   padding-right: 12px;
-  line-height:1.2;
+  line-height: 1.2;
   color: rgb(33, 111, 219) !important;
   text-decoration: underline !important;
 }
 
-.link-editor .link-controls{
+.link-editor .link-controls {
   display: flex;
   align-items: center;
   gap: 2px;
-  margin-right:-10px;
+  margin-right: -10px;
   margin-left: auto;
 }
 
-.link-editor .link-control-btn{
+.link-editor .link-control-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -646,15 +653,16 @@ i.page-break,
   padding: 0 8px;
   border-radius: 4px;
   cursor: pointer;
-  font-size:14px;
+  font-size: 14px;
 }
 
 .link-editor .link-control-btn:hover {
   background-color: #eee;
 }
 
-.link-editor .link-trash, .link-editor .link-cancel {
-  color:#888;
+.link-editor .link-trash,
+.link-editor .link-cancel {
+  color: #888;
 }
 
 .link-editor .link-input a {
@@ -723,7 +731,7 @@ i.page-break,
   line-height: 16px;
   font-size: 14px;
   display: flex;
-  align-items:center;
+  align-items: center;
   align-content: center;
   flex-direction: row;
   flex-shrink: 0;
@@ -769,7 +777,7 @@ i.page-break,
   line-height: 20px;
   flex-grow: 1;
   min-width: 150px;
-  font-size:14px;
+  font-size: 14px;
 }
 
 .dropdown .item .icon {
@@ -791,7 +799,7 @@ i.page-break,
   height: 1px;
 }
 
-.dropdown hr{
+.dropdown hr {
   margin: 4px 8px;
   border: none;
   border-top: 1px solid #eee;
@@ -1378,7 +1386,7 @@ button.action-button:disabled {
   width: calc(100% - 4px);
   border-radius: 8px;
   padding: 4px;
-  background:#fff;
+  background: #fff;
   box-shadow: 0 12px 12px 0 rgba(0, 0, 0, 0.02);
 }
 
@@ -1432,9 +1440,9 @@ button.toolbar-item:disabled .chevron-down {
 }
 
 button.toolbar-item.active {
-  background-color: #E5F2FC;
-  color: #2783DE;
-  font-weight:500;
+  background-color: #e5f2fc;
+  color: #2783de;
+  font-weight: 500;
 }
 
 button.toolbar-item.active i {
@@ -1665,9 +1673,9 @@ button.item i {
 }
 
 button.item.dropdown-item-active {
-  background-color: #E5F2FC;
-  color: #2783DE;
-  font-weight:500
+  background-color: #e5f2fc;
+  color: #2783de;
+  font-weight: 500;
 }
 
 button.item.dropdown-item-active i {
@@ -1817,7 +1825,7 @@ button.item.dropdown-item-active i {
   vertical-align: super;
 }
 .PlaygroundEditorTheme__textCode {
-  color:#EB5757 !important;
+  color: #eb5757 !important;
   border-radius: 4px;
   background-color: rgb(240, 242, 245);
   padding: 1px 0.25rem;
@@ -2399,6 +2407,6 @@ button.item.dropdown-item-active i {
   background-size: contain;
 }
 
-.compact-picker .flexbox-fix{
-  display:none !important;
+.compact-picker .flexbox-fix {
+  display: none !important;
 }

@@ -76,7 +76,7 @@ function App() {
           )}
         </div>
       </div>
-      <RichEditor key={editorKey} value={content} onChange={setContent} />
+      <RichEditor key={editorKey} value={content} onChange={setContent} height="70vh"/>
     </>
   );
 }

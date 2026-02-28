@@ -67,9 +67,10 @@ import ComponentPickerMenuPlugin from "./plugins/ComponentPickerPlugin";
 type RichEditorProps = {
   value?: string;
   onChange: (value: string) => void;
+  height?: string;
 };
 
-export default function RichEditor({ value, onChange }: RichEditorProps) {
+export default function RichEditor({ value, onChange, height }: RichEditorProps) {
   const app = useMemo(
     () =>
       defineExtension({
@@ -92,7 +93,7 @@ export default function RichEditor({ value, onChange }: RichEditorProps) {
               <SharedHistoryContext>
                 <TableContext>
                   <ToolbarContext>
-                    <div className="editor-shell">
+                    <div className="editor-shell" style={{ height }}>
                       <Editor value={value} onChange={onChange} />
                     </div>
                   </ToolbarContext>
@@ -176,7 +177,7 @@ function Editor({
   }, [isSmallWidthViewport]);
 
   return (
-    <>
+    <div className="editor-shell-inner">
       {isRichText && (
         <ToolbarPlugin
           editor={editor}
@@ -191,11 +192,7 @@ function Editor({
           setIsLinkEditMode={setIsLinkEditMode}
         />
       )}
-      <div
-        className={`editor-container ${showTreeView ? "tree-view" : ""} ${
-          !isRichText ? "plain-text" : ""
-        }`}
-      >
+      <div className="editor-container">
         <CustomOnChangePlugin value={value || ""} onChange={onChange} />
         {isMaxLength && <MaxLengthPlugin maxLength={30} />}
         <ComponentPickerMenuPlugin />
@@ -298,6 +295,6 @@ function Editor({
         <div>{showTableOfContents && <TableOfContentsPlugin />}</div>
         {shouldUseLexicalContextMenu && <ContextMenuPlugin />}
       </div>
-    </>
+    </div>
   );
 }
