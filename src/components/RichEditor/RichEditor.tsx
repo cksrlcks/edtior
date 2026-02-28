@@ -62,6 +62,7 @@ import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbar
 
 import { ToolbarContext } from "./context/ToolbarContext";
 import { FlashMessageContext } from "./context/FlashMessageContext";
+import ComponentPickerMenuPlugin from "./plugins/ComponentPickerPlugin";
 
 type RichEditorProps = {
   value?: string;
@@ -197,6 +198,7 @@ function Editor({
       >
         <CustomOnChangePlugin value={value || ""} onChange={onChange} />
         {isMaxLength && <MaxLengthPlugin maxLength={30} />}
+        <ComponentPickerMenuPlugin />
         <StickyPlugin />
         <AutoLinkPlugin />
         <DragDropPaste />
