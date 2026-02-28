@@ -198,7 +198,7 @@ function Editor({
         <ComponentPickerMenuPlugin />
         <StickyPlugin />
         <AutoLinkPlugin />
-        <DragDropPaste />
+        {/* <DragDropPaste /> */}
         <AutoFocusPlugin />
         {selectionAlwaysOnDisplay && <SelectionAlwaysOnDisplay />}
         <ClearEditorPlugin />
